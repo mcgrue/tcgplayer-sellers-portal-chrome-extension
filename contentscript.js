@@ -150,6 +150,8 @@ if( document.location.href.startsWith('https://store.tcgplayer.com/admin/product
           localStorage.setItem('product-catalog-oldSearch', this.value);
       })
 
+      // document.getElementById("SearchValue").focus(); // not working
+
       document.body.style.backgroundColor = 'orange';
 
       /// END CATALOG PAGE STUFF
