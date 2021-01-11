@@ -13,6 +13,12 @@ if( document.location.href.startsWith("https://store.tcgplayer.com/admin/product
       document.body.style.backgroundColor = 'pink';
       $('input[value="Match"]').remove();
 
+      var newSearch = $("<input name=SearchValue></input>");
+      var form = $("<form method=get action=https://store.tcgplayer.com/admin/product/catalog></form>");
+      form.append(newSearch);
+
+      $($("#rightSide > div > div:nth-child(5)")[0]).append(form);
+
       $('span').each(function(){
           var span = $(this);
           if ($(span).data().bind === "formatCurrency: lowestPrice") {
