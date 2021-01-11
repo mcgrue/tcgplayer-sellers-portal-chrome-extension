@@ -15,6 +15,7 @@ function findGetParameter(parameterName) {
 if( document.location.href.startsWith("https://store.tcgplayer.com/admin/product/manage") ) {
 ;(function() {
   function script() {
+
     // your main code here
     console.log('Grues tcgplayer extension injected into card page');
     setTimeout( () => {
@@ -115,6 +116,26 @@ if( document.location.href.startsWith('https://store.tcgplayer.com/admin/product
       /////////////////////////////////////////////////
       //// PUT CATALOG PAGE STUFF HERE
       document.body.style.backgroundColor = 'pink';
+
+      function findGetParameter(parameterName) {
+          var result = null,
+              tmp = [];
+          location.search
+              .substr(1)
+              .split("&")
+              .forEach(function (item) {
+                tmp = item.split("=");
+                if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+              });
+          return result;
+      }
+
+      if( findGetParameter("OnlyMyInventory") === "True" ) { // I never want this as a get param
+        window.location = "https://store.tcgplayer.com/admin/product/catalog";
+        return;
+      }
+
+        
       
       var oldName = localStorage.getItem('product-catalog-oldSearch');
       var getSearchMode = findGetParameter("SearchValue");
