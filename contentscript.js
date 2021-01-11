@@ -1,3 +1,16 @@
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
+
 
 if( document.location.href.startsWith("https://store.tcgplayer.com/admin/product/manage") ) {
 ;(function() {
@@ -14,7 +27,7 @@ if( document.location.href.startsWith("https://store.tcgplayer.com/admin/product
       $('input[value="Match"]').remove();
 
       var newSearch = $("<input name=SearchValue></input>");
-      var form = $("<form method=get action=https://store.tcgplayer.com/admin/product/catalog></form>");
+      var form = $("<form method=get action=https://store.tcgplayer.com/admin/product/catalog><input type=hidden name=CategoryId value=1 <!--MTG Category-->></form>");
       form.append(newSearch);
 
       $($("#rightSide > div > div:nth-child(5)")[0]).append(form);
@@ -90,7 +103,7 @@ if( document.location.href.startsWith("https://store.tcgplayer.com/admin/product
 
 
 
-if( document.location.href === 'https://store.tcgplayer.com/admin/product/catalog' ) {
+if( document.location.href.startsWith('https://store.tcgplayer.com/admin/product/catalog') ) {
 
 ;(function() {
   function script() {
@@ -101,10 +114,11 @@ if( document.location.href === 'https://store.tcgplayer.com/admin/product/catalo
       /////////////////////////////////////////////////
       /////////////////////////////////////////////////
       //// PUT CATALOG PAGE STUFF HERE
+      document.body.style.backgroundColor = 'pink';
       
       var oldName = localStorage.getItem('product-catalog-oldSearch');
-
-      if(oldName) {
+      var getSearchMode = findGetParameter("SearchValue");
+      if(oldName && !getSearchMode) {
         ko.contextFor(document.getElementById("SearchValue")).$root.ProductName(oldName);
       } 
       ko.contextFor(document.getElementById("CategoryId")).$root.ProductLine(1);
@@ -114,6 +128,8 @@ if( document.location.href === 'https://store.tcgplayer.com/admin/product/catalo
       document.getElementById("SearchValue").addEventListener('input', function(evt) {
           localStorage.setItem('product-catalog-oldSearch', this.value);
       })
+
+      document.body.style.backgroundColor = 'orange';
 
       /// END CATALOG PAGE STUFF
       /////////////////////////////////////////////////
