@@ -80,6 +80,10 @@ if( document.location.href.startsWith("https://store.tcgplayer.com/admin/product
   console.log("Grue's tcgplayer extension loaded for Card Page");
 }
 
+
+
+
+
 if( document.location.href === 'https://store.tcgplayer.com/admin/product/catalog' ) {
 
 ;(function() {
@@ -126,9 +130,6 @@ if( document.location.href === 'https://store.tcgplayer.com/admin/product/catalo
   console.log("Grue's tcgplayer extension loaded for Catalog Page");
 }
 
-if( document.location.href === 'https://store.tcgplayer.com/admin/orders/orderlist' ) {
-  document.body.style.backgroundColor = 'orange';
-}
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
@@ -137,3 +138,66 @@ chrome.runtime.onMessage.addListener(
       console.log(request.url) // new url is now in content scripts!
     }
 });
+
+
+
+// THIS PAGE IS IN VUE.
+//
+// if( document.location.href === 'https://store.tcgplayer.com/admin/orders/orderlist' ) {
+// ;(function() {
+//   function script() {
+//     // your main code here
+//     console.log('Grues tcgplayer extension injected into orderlist page');
+//     setTimeout( () => {
+//       /////////////////////////////////////////////////
+//       /////////////////////////////////////////////////
+//       /////////////////////////////////////////////////
+//       //// PUT ORDERLIST PAGE STUFF HERE
+      
+//       document.body.style.backgroundColor = 'red';
+
+//       var uselessCheckbox = $("#rightSide > div > div:nth-child(4) > div > span > div > div.widget-content > div > div.table-wrapper > table > thead > tr > th.checkbox-cell > label > span.check");
+//       uselessCheckbox.parent();
+//       var newButton = $("<button>x</button>");
+
+//       newButton.click( () => {
+//         $('tr').each(function(){
+//             var tr = $($(this).context);
+
+//             /// that ugly green
+//             if( tr.css('background-color') === "rgb(210, 233, 212)" ) {
+//               var check = $($(tr).find(":checkbox")[0]);
+//               check.prop( "checked", true );
+//               check.prop( "value", "true" );
+//               tr.addClass('is-checked');
+//             }
+//         } ) 
+//       } );
+
+//       uselessCheckbox.parent().append(newButton);
+//       uselessCheckbox.remove();
+
+//       document.body.style.backgroundColor = 'green';
+
+//       /// END ORDERLIST PAGE STUFF
+//       /////////////////////////////////////////////////
+//       /////////////////////////////////////////////////
+//       /////////////////////////////////////////////////
+
+//     }, 100 );
+//   }
+
+//   function inject(fn) {
+//     const script = document.createElement('script')
+//     script.text = `(${fn.toString()})();`
+//     document.documentElement.appendChild(script)
+//   }
+
+//   inject(script);
+// })();
+
+//   console.log("Grue's tcgplayer extension loaded for Orderlist Page");
+// }
+
+
+
